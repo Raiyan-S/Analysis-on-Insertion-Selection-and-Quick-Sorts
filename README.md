@@ -51,7 +51,7 @@ insertion sort is 𝑂(𝑛^2 ). This means that, on average, the algorithm will
 steps to sort a list of n items. In the worst-case scenario, it is also 𝑂(𝑛^2 ).
 
 ### Example of Insertion Sort
-
+![](https://github.com/Raiyan-S/Analysis-on-Insertion-Selection-and-Quick-Sorts/blob/main/Example%20of%20Insertion%20Sort.png)
 
 This is an unsorted array of 5. To apply the Insertion sort, we start at the second
 element and compare it with the first element. If the second element is smaller than
@@ -62,6 +62,20 @@ the previous element and repeat till the array is sorted.
 
 ### Design and Implementation of Insertion Sort
 
+```
+public static void insertionSort(int array[]) {
+
+        for (int j = 1; j < array.length; j++) {
+            int key = array[j];
+            int i = j - 1;
+            while ((i > -1) && (array[i] > key)) {
+                array[i + 1] = array[i];
+                i--;
+            }
+            array[i + 1] = key;
+        }
+    }
+```
 
 ## Selection Sort
 
@@ -96,7 +110,7 @@ selection sort is considered to be a relatively inefficient sorting algorithm, a
 not used in practice for large data sets.
 
 ### Example of Selection Sort
-
+![](https://github.com/Raiyan-S/Analysis-on-Insertion-Selection-and-Quick-Sorts/blob/main/Example%20of%20Selection%20Sort.png)
 
 This is an unsorted array of 9. To apply the Selection sort, we find the smallest
 element in the array, which is 13 in this case. It then compares with the previous
@@ -107,6 +121,28 @@ the unsorted list till the array is sorted.
 
 
 ### Design and Implementation of Selection Sort
+
+```
+public static void selectSort(int numArray[]) {
+        int n = numArray.length;
+
+        //traverse the unsorted array
+        for (int i = 0; i < n - 1; i++) {
+            //finding the minimum element in the unsorted array
+            int min_idx = i;
+            for (int j = i + 1; j < n; j++) {
+                if (numArray[j] < numArray[min_idx]) {
+                    min_idx = j;
+                }
+            }
+
+            //swap minimum element with compared element
+            int temp = numArray[min_idx];
+            numArray[min_idx] = numArray[i];
+            numArray[i] = temp;
+        }
+    }
+```
 
 ## Quick Sort
 
@@ -138,6 +174,7 @@ having all elements. This leads to 𝑂(𝑛^2 ) time complexity.
 
 
 ### Example of Quick Sort
+![](https://github.com/Raiyan-S/Analysis-on-Insertion-Selection-and-Quick-Sorts/blob/main/Example%20of%20Quick%20Sort.png)
 
 We choose the last element of the array as the pivot, which is 8. We partition the
 array by using two pointers, one starting at the first element of the array and one
@@ -163,8 +200,50 @@ but is concatenated at the end.
 
 ### Design and Implementation of Quick Sort
 
+```
+public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+
+            //pIndex is partitioning index
+            int pIndex = partition(arr, low, high);
+
+            //recursion method until the subproblem is sorted
+            quickSort(arr, low, pIndex - 1);
+            quickSort(arr, pIndex + 1, high);
+        }
+    }
+
+    private static int partition(int[] arr, int low, int high) {
+
+        int pivot = arr[high];
+
+        int i = (low - 1);
+
+        for (int j = low; j <= high - 1; j++) {
+
+            //if current element is smaller than the pivot
+            if (arr[j] < pivot) {
+
+                //increment index of smaller element
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return (i + 1);
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+```
 
 ## Comparison
+![](https://github.com/Raiyan-S/Analysis-on-Insertion-Selection-and-Quick-Sorts/blob/main/Comparison.png)
+
+This will differ based on the device.
 
 ## Conclusion
 
